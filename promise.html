@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+    ASYNCHRONOUS - bất đồng bộ
+    1. callback : là hàm đucợ chuyền vào làm tham, đối số của hàm khác -> khi mà nhiều hầm callback lồng vò nhau thì sẽ đến tình trạng callback hell 
+
+    2. promise : sinh ra ở phiên bản es6(2015) để xử li các tác vụ bất đồng bộ.
+                 khi gặp các code dạng callback-hell khi xử lí với promise code nhìn gọn gàng hơn, dễ maintai hơn
+    Cách sử dụng:
+        - khởi tạo promise bằng new Promise();
+        - bên trong hàm tạo constructor object nhận vào 1 đối số là function trong function sẽ nhận vào 2 tham số(resolve,reject)
+         + code thành công nhận resolve
+         + code thất bại nhận reject
+        promise
+        .then(data =>{console.log(data);});
+        .catch(err=>{console.log("lỗi",err);});
+     -->
+    <script>
+        // callback-hell
+        // setTimeout(() => {
+        //     console.log("viec 1");
+        //     setTimeout(() => {
+        //         console.log("viec 2");
+        //         setTimeout(() => {
+        //             console.log("viec 3");
+        //         }, 1000)
+        //     }, 1000)
+        // }, 1000)
+
+        // let promise = new Promise((resolve, reject) => {
+        // resolve : giải quyết, thành công
+        // reject : giải quyết, thất bại
+        // viết các logic code
+        // nếu như thành công thì gọi resolve
+        // nếu như thất bại thì gọi reject
+        // resolve(111);// trong ngoặc là giá trị sẽ đc chuyền vào data
+        // reject("có lỗi");
+        // })
+        // promise.then(data => { console.log(data); })
+        //     .then(data2 => { console.log(data2); })// khi bà trong code có nhiều .then thì then sau sẽ lấy then trước để là tham số cho nó
+        //     .catch(err => { console.log("lỗi", err); })
+        // console.log(promise);
+
+
+        // promise
+        //     .then(data => { console.log(data); return 222 })
+        //     .then(data1 => { console.log(data1); return 333 })
+        //     .then(data2 => { console.log(data2) })
+
+        // let promise = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         resolve(111);
+        //     }, 1000)
+        //     setTimeout(() => {
+        //         resolve(222);
+        //     }, 2000)
+        //     setTimeout(() => {
+        //         resolve(333);
+        //     }, 3000)
+        // })
+        // promise
+        //     .then(data => {
+        //         return new Promise((resolve, reject) => {
+        //             setTimeout(() => {
+        //                 console.log(111);
+        //                 resolve();
+        //             }, 1000)
+        //         })
+        //     })
+        //     .then(data2 => {
+        //         return new Promise((resolve, reject) => {
+        //             setTimeout(() => {
+        //                 console.log(222);
+        //                 resolve();
+        //             }, 1000)
+        //         })
+        //     })
+        //     .then(data3 => {
+        //         setTimeout(() => {
+        //             console.log(333);
+        //         }, 1000)
+        //     })
+
+
+            function getData() {
+            try { 
+                let getData = fetch("https://jsonplaceholder.typicode.com/todos/11")
+                getData
+                    .then(user => user.json())
+                    .then(data => console.log(data))
+            }catch (err){
+                console.log("lỗi",err);
+            }
+            }
+            getData();
+    </script>
+</body>
+
+</html>
